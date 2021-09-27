@@ -10,7 +10,6 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
       const user = await this.repo.create(createUserDto);
-      user.password = undefined;
       return user;
     } catch (error) {
       throw error;

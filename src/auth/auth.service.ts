@@ -42,7 +42,6 @@ export class AuthService {
           HttpStatus.BAD_REQUEST,
         );
       }
-      user.password = undefined;
       return user;
     } catch (error) {
       throw new HttpException(

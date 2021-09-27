@@ -12,8 +12,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     });
   }
   async validate(email: string, password: string): Promise<UserDoc> {
-    console.log('[LocalStrategy validate]');
-    
     return this.authService.getAuthenticatedUser(email, password);
   }
 }
