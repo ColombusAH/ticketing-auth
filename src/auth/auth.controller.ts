@@ -46,9 +46,18 @@ export class AuthController {
     return response.send(user);
   }
 
-  @Post()
+  @Post('logout')
   @UseGuards(JwtAuthenticationGuard)
-  test(@Res() response: Response) {
-    return response.send('secure');
+  logout(@Req() request: RequestWithUser, @Res() response: Response) {
+    response.setHeader('Set-cookie', this.authService.getCookieForLogOut());
+    return response.sendStatus(HttpStatus.OK);
+  }
+
+  @UseGuards(JwtAuthenticationGuard)
+  @Get('currentuser')
+  currentuser(@Req() request: RequestWithUser) {
+    const user = request.user;
+    user.password = undefined;
+    return user;
   }
 }
