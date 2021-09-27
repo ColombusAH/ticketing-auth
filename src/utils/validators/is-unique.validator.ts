@@ -20,8 +20,6 @@ export class UniqueForUserRule implements ValidatorConstraintInterface {
       const user = await this.usersRepository.getByKey(key, value);
       return !user;
     } catch (e) {
-      console.log(e);
-
       return false;
     }
   }
@@ -33,9 +31,6 @@ export class UniqueForUserRule implements ValidatorConstraintInterface {
 
 export function IsUniqueForUser(validationOptions?: ValidationOptions) {
   return function (object: any, propertyName: string) {
-    console.log(object);
-    console.log(propertyName);
-
     registerDecorator({
       name: 'IsUniqueForUser',
       target: object.constructor,

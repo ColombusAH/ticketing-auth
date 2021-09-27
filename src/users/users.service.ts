@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateUserDto, CreateUserDto } from './dto';
 import { User } from './interfaces';
 import { UsersRepository } from './users.repo';
@@ -25,7 +25,11 @@ export class UsersService {
     return this.repo.getByKey('email', email);
   }
   findOneById(id: string) {
-    return this.repo.getByKey('id', id);
+    const user = this.repo.getByKey('id', id);
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    return user;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

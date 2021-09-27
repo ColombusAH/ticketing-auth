@@ -25,9 +25,6 @@ export class UsersRepository {
     key: keyof CreateUserDto | string,
     value: CreateUserDto[keyof CreateUserDto],
   ) {
-    console.log('key=', key);
-    console.log('value=', value);
-
     return this.userModel.findOne({ [key]: value });
   }
 }
