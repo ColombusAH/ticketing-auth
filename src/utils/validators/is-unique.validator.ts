@@ -16,14 +16,8 @@ export class UniqueForUserRule implements ValidatorConstraintInterface {
   async validate(value: string, args: ValidationArguments) {
     try {
       const key = args.property;
-      console.log('the key is');
-      console.log({ key });
-      console.log({ value });
 
       const user = await this.usersRepository.getByKey(key, value);
-      console.log(`the user ${args.property} is `);
-      console.log(user);
-
       return !user;
     } catch (e) {
       console.log(e);
